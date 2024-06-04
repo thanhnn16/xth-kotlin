@@ -1,5 +1,6 @@
 package com.thanhnn16.com_tam_xth.ui.screens
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,5 +18,5 @@ fun Onboarding(modifier: Modifier) {
 )
 @Composable
 fun OnboardingPreview() {
-    Onboarding(Modifier.Companion.padding(innerPadding))
+    Onboarding(modifier = Modifier.fillMaxSize())
 }
