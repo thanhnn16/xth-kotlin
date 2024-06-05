@@ -32,10 +32,12 @@ import androidx.navigation.compose.rememberNavController
 //import com.google.accompanist.pager.rememberPagerState
 import com.thanhnn16.com_tam_xth.R
 
-@OptIn( ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun Onboarding(navController: NavController) {
-
+fun Onboarding(
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
     val roboto_regula = FontFamily(
         Font(R.font.roboto_regula)
     )
@@ -49,7 +51,7 @@ fun Onboarding(navController: NavController) {
         }
     }
 
-    val pagerState = rememberPagerState(pageCount = { 3 })
+    val pagerState = rememberPagerState(pageCount = { 4 })
     val imageIds = listOf(R.drawable.walk1, R.drawable.walk2, R.drawable.walk3, R.drawable.walk4)
     var textId1s by remember { mutableStateOf("Text 1") }
     var textId1Small by remember { mutableStateOf("Small Text 1") }
@@ -58,19 +60,26 @@ fun Onboarding(navController: NavController) {
         when (pagerState.currentPage) {
             0 -> {
                 textId1s = "Easy to Order"
-                textId1Small = "Experience seamless convenience with our fast and user-friendly food delivery app, making ordering your favorite meals a breeze!"
+                textId1Small =
+                    "Experience seamless convenience with our fast and user-friendly food delivery app, making ordering your favorite meals a breeze!"
             }
+
             1 -> {
                 textId1s = "Has the most delicious food"
-                textId1Small = "Enjoy dishes expertly prepared by experienced chefs for a wonderful dining experience!"
+                textId1Small =
+                    "Enjoy dishes expertly prepared by experienced chefs for a wonderful dining experience!"
             }
+
             2 -> {
                 textId1s = "Schedule your own meals"
-                textId1Small = "Take charge of your health with scheduled, nutritious meals tailored just for you."
+                textId1Small =
+                    "Take charge of your health with scheduled, nutritious meals tailored just for you."
             }
+
             3 -> {
                 textId1s = "What are you waiting for ?"
-                textId1Small = "Explore a world of culinary delights – place your order now and discover a variety of tempting dishes waiting just for you!"
+                textId1Small =
+                    "Explore a world of culinary delights – place your order now and discover a variety of tempting dishes waiting just for you!"
             }
         }
     }
@@ -84,17 +93,16 @@ fun Onboarding(navController: NavController) {
     ) {
         Column(
             modifier = Modifier
+                .padding(start = 20.dp)
                 .fillMaxWidth(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.Start
         ) {
             Box(
                 modifier = Modifier
-                    .padding(20.dp)
-                    .height(90.dp)
-                    .width(177.dp),
-contentAlignment = Alignment.Center
-
+                    .height(110.dp)
+                    .width(170.dp),
+                contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = text,
@@ -102,14 +110,16 @@ contentAlignment = Alignment.Center
                     fontFamily = roboto_regula,
                     modifier = Modifier,
                     fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Start
+                    textAlign = TextAlign.Start,
+                    lineHeight = 48.sp
                 )
             }
             Box(
                 modifier = Modifier
-//                    .padding(20.dp)
-                    .height(35.dp)
+                    .height(42.dp)
                     .width(224.dp),
+                contentAlignment = Alignment.Center
+
             ) {
                 Text(
                     text = "Your favourite foods delivered fast at your door.",
@@ -145,16 +155,25 @@ contentAlignment = Alignment.Center
         ) {
             Text(
                 text = textId1s,
-                fontSize = 20.sp,
+                fontSize = 22.sp,
+                color = Color(android.graphics.Color.parseColor("#FFFFFF")),
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
-            Text(
-                text = textId1Small,
-                fontSize = 14.sp,
-                textAlign = TextAlign.Center
-            )
+            Box(
+                modifier = Modifier
+                    .padding(horizontal = 24.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = textId1Small,
+                    fontSize = 18.sp,
+                    color = Color(android.graphics.Color.parseColor("#C0C0C0")),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
 
         Row(
@@ -163,19 +182,22 @@ contentAlignment = Alignment.Center
             modifier = Modifier.padding(top = 16.dp)
         ) {
             repeat(imageIds.size) { page ->
-                val color = if (pagerState.currentPage == page) Color(android.graphics.Color.parseColor("#FF7400")) else Color(android.graphics.Color.parseColor("#979797"))
+                val color =
+                    if (pagerState.currentPage == page) Color(android.graphics.Color.parseColor("#FF7400")) else Color(
+                        android.graphics.Color.parseColor("#979797")
+                    )
                 Box(
                     modifier = Modifier
                         .padding(end = 8.dp)
                         .padding(bottom = 20.dp)
                         .size(width = 8.dp, height = 5.dp)
-                        .background(color, shape = RoundedCornerShape(50)) // Adjusted shape
+                        .background(color, shape = RoundedCornerShape(50))
                 )
             }
         }
 
         Button(
-            onClick = { navController.navigate("EnterMail") },
+            onClick = { navController.navigate("createAccount") },
             modifier = Modifier
                 .width(312.dp)
                 .padding(bottom = 20.dp),
