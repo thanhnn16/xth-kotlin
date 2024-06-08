@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import com.thanhnn16.com_tam_xth.ui.screens.FeaturedPartner
+import com.thanhnn16.com_tam_xth.ui.screens.Home
 import com.thanhnn16.com_tam_xth.ui.screens.Onboarding
 import com.thanhnn16.com_tam_xth.ui.screens.ScreenNavigation
 import com.thanhnn16.com_tam_xth.ui.theme.Com_Tam_XTHTheme
@@ -23,8 +25,7 @@ class MainActivity : ComponentActivity() {
          */
         setContent {
             Com_Tam_XTHTheme {
-                   ScreenNavigation()
-
+                ScreenNavigation()
             }
         }
     }

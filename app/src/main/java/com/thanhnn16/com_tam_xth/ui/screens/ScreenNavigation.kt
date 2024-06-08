@@ -114,7 +114,7 @@ fun ScreenNavigation() {
             }
             composable(Screen.Login.route) {
                 Login()
-                }
+            }
         }
     }
 }
