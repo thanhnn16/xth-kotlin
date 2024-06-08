@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -91,7 +92,7 @@ fun FeaturedPartnerItem(partner: Partner) {
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Image(
-                                painter = painterResource(id = R.drawable.star),
+                                painter = painterResource(id = R.drawable.stargreen),
                                 contentDescription = null,
                                 modifier = Modifier.size(15.dp)
                             )
@@ -196,4 +197,11 @@ fun FeaturedPartnerItem(partner: Partner) {
             }
         }
     }
+}
+@Preview(
+    showBackground = true
+)
+@Composable
+fun FeaturedPartnerItemPreview(){
+    FeaturedPartnerItem(partner = Partner.getSamplePartner()[0])
 }
