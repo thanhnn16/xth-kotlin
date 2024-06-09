@@ -77,7 +77,7 @@ fun CustomBottomNavigation(navController: NavController, items: List<Screen>) {
 @Composable
 fun ScreenNavigation() {
     val navController = rememberNavController()
-    val items = listOf(Screen.Splash, Screen.Onboarding, Screen.CreateAccount, Screen.UpdateInformation)
+    val items = listOf(Screen.Splash, Screen.Onboarding, Screen.CreateAccount, Screen.UpdateInformation, Screen.Login)
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
@@ -87,7 +87,8 @@ fun ScreenNavigation() {
                     Screen.Splash.route,
                     Screen.Onboarding.route,
                     Screen.CreateAccount.route,
-                    Screen.UpdateInformation.route
+                    Screen.UpdateInformation.route,
+                    Screen.Login.route
                 )
             ) {
                 CustomBottomNavigation(navController, items)
@@ -111,7 +112,9 @@ fun ScreenNavigation() {
             composable(Screen.UpdateInformation.route) {
                 UpdateInformation()
             }
-            // Các màn hình khác
+            composable(Screen.Login.route) {
+                Login()
+            }
         }
     }
 }
