@@ -71,7 +71,11 @@ dependencies {
 
     //Bottom navigation
     implementation ("androidx.compose.material:material:1.6.7")
-    implementation ("androidx.compose.material3:material3:1.0.0-alpha06")
-    implementation ("androidx.compose.ui:ui:1.0.5")
-
+    implementation("io.coil-kt:coil-compose:1.4.0")
+    implementation("com.google.accompanist:accompanist-pager:0.13.0")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.13.0")
+    implementation ("androidx.compose.material:material:1.1.0")
+    implementation ("androidx.compose.ui:ui-tooling:1.1.0")
+    implementation ("androidx.compose.foundation:foundation:1.4.0")
+    implementation ("androidx.compose.material3:material3:1.0.1")
 }
