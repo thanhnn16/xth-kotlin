@@ -6,7 +6,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -38,7 +37,7 @@ fun Onboarding(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
-    val roboto_regula = FontFamily(
+    val robotoRegula = FontFamily(
         Font(R.font.roboto_regula)
     )
 
@@ -107,7 +106,7 @@ fun Onboarding(
                 Text(
                     text = text,
                     fontSize = 36.sp,
-                    fontFamily = roboto_regula,
+                    fontFamily = robotoRegula,
                     modifier = Modifier,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Start,
@@ -124,7 +123,7 @@ fun Onboarding(
                 Text(
                     text = "Your favourite foods delivered fast at your door.",
                     fontSize = 14.sp,
-                    fontFamily = roboto_regula,
+                    fontFamily = robotoRegula,
                     textAlign = TextAlign.Start,
                     color = Color(android.graphics.Color.parseColor("#C0C0C0"))
                 )

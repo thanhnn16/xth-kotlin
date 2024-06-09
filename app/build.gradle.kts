@@ -60,7 +60,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
-    implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation(libs.coil.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -70,8 +70,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     //Bottom navigation
-    implementation ("androidx.compose.material:material:1.6.7")
-    implementation ("androidx.compose.material3:material3:1.0.0-alpha06")
-    implementation ("androidx.compose.ui:ui:1.0.5")
+    implementation (libs.androidx.material)
+    implementation (libs.material3)
+    implementation (libs.ui)
 
 }
