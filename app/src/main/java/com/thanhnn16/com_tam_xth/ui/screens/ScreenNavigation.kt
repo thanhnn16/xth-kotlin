@@ -3,13 +3,12 @@ package com.thanhnn16.com_tam_xth.ui.screens
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material3.Icon
-
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -18,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -77,7 +75,13 @@ fun CustomBottomNavigation(navController: NavController, items: List<Screen>) {
 @Composable
 fun ScreenNavigation() {
     val navController = rememberNavController()
-    val items = listOf(Screen.Splash, Screen.Onboarding, Screen.CreateAccount, Screen.UpdateInformation, Screen.Login)
+    val items = listOf(
+        Screen.Splash,
+        Screen.Onboarding,
+        Screen.CreateAccount,
+        Screen.UpdateInformation,
+        Screen.Login
+    )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
@@ -107,22 +111,35 @@ fun ScreenNavigation() {
                 Onboarding(navController)
             }
             composable(Screen.CreateAccount.route) {
-                CreateAccount()
+                CreateAccount(navController)
             }
             composable(Screen.UpdateInformation.route) {
                 UpdateInformation()
             }
             composable(Screen.Login.route) {
-                Login()
+                Login(navController)
+            }
+            composable("homeScreen") {
+                Home(navController)
+            }
+            composable("forgotPassword") {
+                ForgotPassword(navController)
+            }
+            composable("confirmOwner") {
+                ConfirmOwner(navController)
+            }
+            composable("congrats") {
+                Congrats(navController)
             }
         }
     }
 }
-@Preview
-@Composable
-fun PreviewScreenNavigation() {
-    CustomBottomNavigation(
-        rememberNavController(),
-        listOf(Screen.Splash, Screen.Onboarding, Screen.CreateAccount, Screen.UpdateInformation)
-    )
-}
+//
+//@Preview
+//@Composable
+//fun PreviewScreenNavigation() {
+//    CustomBottomNavigation(
+//        rememberNavController(),
+//        listOf(Screen.Splash, Screen.Onboarding, Screen.CreateAccount, Screen.UpdateInformation)
+//    )
+//}

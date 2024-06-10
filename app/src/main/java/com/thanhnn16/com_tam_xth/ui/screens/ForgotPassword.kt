@@ -1,7 +1,6 @@
 package com.thanhnn16.com_tam_xth.ui.screens
 
 import android.content.ContentValues.TAG
-import android.graphics.fonts.Font
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -35,21 +34,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.thanhnn16.com_tam_xth.R
 
 @Composable
-fun ForgotPassword() {
-    val roboto_regula = FontFamily
-
-
+fun ForgotPassword(navController: NavHostController) {
 
     val text = buildAnnotatedString {
         withStyle(style = SpanStyle(color = Color(android.graphics.Color.parseColor("#C0C0C0")))) {
@@ -60,6 +54,13 @@ fun ForgotPassword() {
     val logo = R.drawable.send
     val scan = R.drawable.fingerscan
 
+    val email = remember {
+        mutableStateOf("")
+    }
+
+    val enter = remember {
+        mutableStateOf("")
+    }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -92,19 +93,6 @@ fun ForgotPassword() {
             )
         }
     }
-    val email = remember {
-        mutableStateOf("")
-    }
-
-    val enter = remember {
-        mutableStateOf("")
-    }
-
-
-
-    Log.d(TAG, "RegisterCard: $email, $enter  ")
-
-
 
     Column(
         modifier = Modifier
@@ -115,7 +103,7 @@ fun ForgotPassword() {
     ) {
         Card(
             modifier = Modifier
-                .offset(y= -110.dp)
+                .offset(y = (-110).dp)
                 .fillMaxWidth(),
             elevation = CardDefaults.cardElevation(3.dp),
             colors = CardDefaults.cardColors(Color(android.graphics.Color.parseColor("#263238")))
@@ -132,8 +120,6 @@ fun ForgotPassword() {
                 val emailInteractionSource = remember { MutableInteractionSource() }
                 val enterInteractionSource = remember { MutableInteractionSource() }
 
-
-
                 OutlinedTextField(
                     modifier = Modifier.width(312.dp),
                     value = email.value,
@@ -149,7 +135,8 @@ fun ForgotPassword() {
                         Image(
                             painter = painterResource(id = logo),
                             contentDescription = null,
-                            modifier = Modifier.size(35.dp))
+                            modifier = Modifier.size(35.dp)
+                        )
                     },
                     shape = RoundedCornerShape(15.dp),
                     colors = TextFieldDefaults.colors(
@@ -175,7 +162,8 @@ fun ForgotPassword() {
                         Image(
                             painter = painterResource(id = scan),
                             contentDescription = null,
-                            modifier = Modifier.size(35.dp))
+                            modifier = Modifier.size(35.dp)
+                        )
                     },
                     shape = RoundedCornerShape(15.dp),
                     colors = TextFieldDefaults.colors(
@@ -187,15 +175,14 @@ fun ForgotPassword() {
                 Spacer(modifier = Modifier.height(20.dp))
                 TextButton(
                     onClick = {
-//
-
+                        navController.navigate("confirmOwner")
                     },
                     modifier = Modifier.width(312.dp),
                     shape = RoundedCornerShape(15.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(android.graphics.Color.parseColor("#FF7400")))
-                )
-                {
+                        containerColor = Color(android.graphics.Color.parseColor("#FF7400"))
+                    )
+                ) {
                     Text(
                         text = "Confirm",
                         fontSize = 16.sp,
@@ -215,7 +202,7 @@ fun ForgotPassword() {
 
 
 @Composable
-fun ConfirmOwner() {
+fun ConfirmOwner(navController: NavHostController) {
     val text = buildAnnotatedString {
         withStyle(style = SpanStyle(color = Color(android.graphics.Color.parseColor("#C0C0C0")))) {
             append("Great, it is you. Now let create new password before you forget it. ")
@@ -277,7 +264,7 @@ fun ConfirmOwner() {
     ) {
         Card(
             modifier = Modifier
-                .offset(y= -110.dp)
+                .offset(y = (-110).dp)
 
                 .fillMaxWidth(),
             elevation = CardDefaults.cardElevation(3.dp),
@@ -296,8 +283,6 @@ fun ConfirmOwner() {
                 val enterInteractionSource = remember { MutableInteractionSource() }
 
 
-
-
                 OutlinedTextField(
                     modifier = Modifier.width(312.dp),
                     value = email.value,
@@ -313,7 +298,8 @@ fun ConfirmOwner() {
                         Image(
                             painter = painterResource(id = scan),
                             contentDescription = null,
-                            modifier = Modifier.size(35.dp))
+                            modifier = Modifier.size(35.dp)
+                        )
                     },
                     shape = RoundedCornerShape(15.dp),
                     colors = TextFieldDefaults.colors(
@@ -338,7 +324,8 @@ fun ConfirmOwner() {
                         Image(
                             painter = painterResource(id = scan),
                             contentDescription = null,
-                            modifier = Modifier.size(35.dp))
+                            modifier = Modifier.size(35.dp)
+                        )
                     },
 
                     shape = RoundedCornerShape(15.dp),
@@ -351,15 +338,14 @@ fun ConfirmOwner() {
                 Spacer(modifier = Modifier.height(20.dp))
                 TextButton(
                     onClick = {
-//
-
+                        navController.navigate("congrats")
                     },
                     modifier = Modifier.width(312.dp),
                     shape = RoundedCornerShape(15.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(android.graphics.Color.parseColor("#FF7400")))
-                )
-                {
+                        containerColor = Color(android.graphics.Color.parseColor("#FF7400"))
+                    )
+                ) {
                     Text(
                         text = "Confirm",
                         fontSize = 16.sp,
@@ -377,12 +363,13 @@ fun ConfirmOwner() {
 }
 
 @Composable
-fun Congrats() {
+fun Congrats(navController: NavHostController) {
 
     val text = buildAnnotatedString {
         withStyle(style = SpanStyle(color = Color(android.graphics.Color.parseColor("#C0C0C0")))) {
-            append("Your new Password is ready !\n" +
-                    "Let’s go !! ")
+            append(
+                "Your new Password is ready !\n" + "Let’s go !! "
+            )
         }
 
     }
@@ -393,7 +380,7 @@ fun Congrats() {
 
         contentAlignment = Alignment.Center,
 
-    ) {
+        ) {
         Column(
             modifier = Modifier
 
@@ -402,8 +389,6 @@ fun Congrats() {
                 .height(200.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
-
-
 
 
         ) {
@@ -425,20 +410,18 @@ fun Congrats() {
                 textAlign = TextAlign.Center
 
 
-
             )
             Spacer(modifier = Modifier.height(20.dp))
             TextButton(
                 onClick = {
-//
-
+                    navController.navigate("login")
                 },
                 modifier = Modifier.width(312.dp),
                 shape = RoundedCornerShape(15.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(android.graphics.Color.parseColor("#FF7400")))
-            )
-            {
+                    containerColor = Color(android.graphics.Color.parseColor("#FF7400"))
+                )
+            ) {
                 Text(
                     text = "Log in",
                     fontSize = 16.sp,
@@ -454,35 +437,34 @@ fun Congrats() {
     }
 
 }
-
-
-@Preview(
-    group = "forgot_password",
-    name = "forgot_password",
-    showBackground = true
-)
-@Composable
-fun ForgotPasswordPreview() {
-    ForgotPassword()
-}
-
-@Preview(
-    group = "forgot_password",
-    name = "confirm_owner",
-    showBackground = true
-)
-
-@Composable
-fun ConfirmOwnerPreview() {
-    ConfirmOwner()
-}
-
-@Preview(
-    group = "forgot_password",
-    name = "congrats",
-    showBackground = true
-)
-@Composable
-fun CongratsPreview() {
-    Congrats()
-}
+//
+//@Preview(
+//    group = "forgot_password",
+//    name = "forgot_password",
+//    showBackground = true
+//)
+//@Composable
+//fun ForgotPasswordPreview() {
+//    ForgotPassword(navController)
+//}
+//
+//@Preview(
+//    group = "forgot_password",
+//    name = "confirm_owner",
+//    showBackground = true
+//)
+//
+//@Composable
+//fun ConfirmOwnerPreview() {
+//    ConfirmOwner(navController)
+//}
+//
+//@Preview(
+//    group = "forgot_password",
+//    name = "congrats",
+//    showBackground = true
+//)
+//@Composable
+//fun CongratsPreview() {
+//    Congrats(navController)
+//}

@@ -74,4 +74,7 @@ dependencies {
     implementation (libs.material3)
     implementation (libs.ui)
 
+    implementation(libs.accompanist.pager)
+    implementation(libs.google.accompanist.pager.indicators)
+
 }

@@ -1,10 +1,9 @@
 package com.thanhnn16.com_tam_xth.ui.screens
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -40,13 +39,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.thanhnn16.com_tam_xth.R
 
 @Composable
-fun Login() {
+fun Login(navController: NavHostController) {
 
     val roboto_regula = FontFamily(
         Font(R.font.roboto_regula)
@@ -121,6 +120,7 @@ fun Login() {
                         text = "well hello there !".uppercase(),
                         color = Color(android.graphics.Color.parseColor("#ffffff")),
                         fontSize = 36.sp,
+                        lineHeight = 40.sp,
                         fontFamily = roboto_regula,
                         modifier = Modifier.padding(bottom = 8.dp),
                         fontWeight = FontWeight.Bold,
@@ -130,7 +130,11 @@ fun Login() {
                         text = text,
                         fontSize = 14.sp,
                         fontFamily = roboto_regula,
-                        modifier = Modifier.padding(bottom = 12.dp),
+                        modifier = Modifier
+                            .padding(bottom = 12.dp)
+                            .clickable {
+                                navController.navigate("createAccount")
+                            },
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Start
                     )
@@ -144,7 +148,6 @@ fun Login() {
                     mutableStateOf("")
                 }
 
-                Log.d(TAG, "RegisterCard: $emailValue, $password  ")
 
                 Spacer(modifier = Modifier.height(20.dp))
 
@@ -227,7 +230,7 @@ fun Login() {
 
                             TextButton(
                                 onClick = {
-                                    //                            navController.navigate("Home")
+                                    navController.navigate("forgotPassword")
                                 },
                             ) {
                                 Text(
@@ -241,6 +244,7 @@ fun Login() {
 
                             TextButton(
                                 onClick = {
+                                    navController.navigate("homeScreen")
                                     //                            if (name.value.isNotEmpty() && emailValue.value.isNotEmpty() && password.value.isNotEmpty()) {
                                     //                                Toast.makeText(
                                     //                                    navController.context,
@@ -285,15 +289,4 @@ fun Login() {
             }
         }
     }
-}
-
-
-@Preview(
-    group = "login",
-    name = "login",
-    showBackground = true
-)
-@Composable
-fun LoginPreview() {
-    Login()
 }

@@ -14,7 +14,7 @@ import com.thanhnn16.com_tam_xth.ui.screens.Onboarding
 import com.thanhnn16.com_tam_xth.ui.screens.ScreenNavigation
 import com.thanhnn16.com_tam_xth.ui.theme.Com_Tam_XTHTheme
 
-class xMainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

@@ -5,6 +5,7 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -42,10 +43,11 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.thanhnn16.com_tam_xth.R
 
 @Composable
-fun CreateAccount() {
+fun CreateAccount(navController: NavController) {
 
     val roboto_regula = FontFamily(
         Font(R.font.roboto_regula)
@@ -88,6 +90,7 @@ fun CreateAccount() {
                 color = Color(android.graphics.Color.parseColor("#ffffff")),
                 fontSize = 36.sp,
                 fontFamily = roboto_regula,
+                lineHeight = 40.sp,
                 modifier = Modifier.padding(bottom = 8.dp),
                 fontWeight = FontWeight(900),
                 textAlign = TextAlign.Start
@@ -96,7 +99,9 @@ fun CreateAccount() {
                 text = text,
                 fontSize = 12.sp,
                 fontFamily = roboto_regula,
-                modifier = Modifier.padding(bottom = 12.dp),
+                modifier = Modifier.padding(bottom = 12.dp).clickable {
+                    navController.navigate("login")
+                },
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Start
             )
@@ -231,6 +236,7 @@ fun CreateAccount() {
 
                     TextButton(
                         onClick = {
+                            navController.navigate("homeScreen")
 //                            if (name.value.isNotEmpty() && emailValue.value.isNotEmpty() && password.value.isNotEmpty()) {
 //                                Toast.makeText(
 //                                    navController.context,
@@ -482,28 +488,4 @@ fun UpdateInformation() {
             }
         }
     }
-}
-
-
-
-
-
-@Preview(
-    group = "create_account",
-    name = "create_account",
-    showBackground = true
-)
-@Composable
-fun CreateAccountPreview() {
-    CreateAccount()
-}
-
-@Preview(
-    group = "create_account",
-    name = "update_information",
-    showBackground = true
-)
-@Composable
-fun UpdateInformationPreview() {
-    UpdateInformation()
 }

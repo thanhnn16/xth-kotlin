@@ -1,8 +1,5 @@
 package com.thanhnn16.com_tam_xth.ui.screens
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -23,17 +20,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.PagerState
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
 import androidx.compose.material.TabRowDefaults
-import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,20 +43,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.pagerTabIndicatorOffset
-import kotlinx.coroutines.launch
 import com.thanhnn16.com_tam_xth.R
 import com.thanhnn16.com_tam_xth.ui.theme.Pink40
 import com.thanhnn16.com_tam_xth.ui.theme.backRound
 import com.thanhnn16.com_tam_xth.ui.theme.greenColor
 import com.thanhnn16.com_tam_xth.ui.theme.greenLightColor
+import kotlinx.coroutines.launch
 
 
 data class Product(
@@ -123,8 +115,7 @@ val products = listOf(
     // Repeat for other products...
 )
 
-@OptIn(ExperimentalUnitApi::class)
-@ExperimentalPagerApi
+@OptIn(ExperimentalFoundationApi::class, ExperimentalPagerApi::class)
 @Composable
 fun Favorite() {
     val pagerState = com.google.accompanist.pager.rememberPagerState(pageCount = 3)
@@ -152,7 +143,7 @@ fun Favorite() {
 
 @Composable
 fun RenderProductItem(product: Product) {
-    val painter = rememberImagePainter(data = product.imageResId) // Use the drawable ID here
+    val painter = rememberAsyncImagePainter(model = product.imageResId) // Use the drawable ID here
     val isHeartFilled = remember { mutableStateOf(false) }
 
     Box(
@@ -162,8 +153,7 @@ fun RenderProductItem(product: Product) {
             .clip(RoundedCornerShape(15.dp))
             .background(greenLightColor)
             .border(
-                border = BorderStroke(0.dp, color = Color.Black),
-                shape = RoundedCornerShape(15.dp)
+                border = BorderStroke(0.dp, color = Color.Black), shape = RoundedCornerShape(15.dp)
             )
     ) {
         Column {
@@ -244,11 +234,9 @@ fun RenderProductItem(product: Product) {
                 modifier = Modifier
                     .width(100.dp)
                     .height(40.dp)
-            )
-            {
+            ) {
                 Row(
-                    modifier = Modifier
-                        .background(Color.White, shape = RoundedCornerShape(16.dp)),
+                    modifier = Modifier.background(Color.White, shape = RoundedCornerShape(16.dp)),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -278,22 +266,19 @@ fun RenderProductItem(product: Product) {
     }
 }
 
-@ExperimentalPagerApi
+@OptIn(ExperimentalFoundationApi::class, ExperimentalPagerApi::class)
 @Composable
 fun Tabs(pagerState: com.google.accompanist.pager.PagerState) {
     val list = listOf(
         "Restaurants" to Pair(
-            R.drawable.uni_1,
-            R.drawable.union
+            R.drawable.uni_1, R.drawable.union
         ), // Replace with your image resources
         "Dishes" to Pair(
-            R.drawable.uni,
-            R.drawable.uni_2
+            R.drawable.uni, R.drawable.uni_2
         ), // Replace with your image resources
     )
     val scope = rememberCoroutineScope()
-    TabRow(
-        selectedTabIndex = pagerState.currentPage,
+    TabRow(selectedTabIndex = pagerState.currentPage,
         backgroundColor = greenColor,
         contentColor = Color.White,
         indicator = { tabPositions ->
@@ -304,18 +289,15 @@ fun Tabs(pagerState: com.google.accompanist.pager.PagerState) {
                     0xFFFF7400
                 ) else Color.White // Change color based on selected tab
             )
-        }
-    ) {
+        }) {
         list.forEachIndexed { index, pair ->
-            Tab(
-                modifier = Modifier.padding(12.dp),
+            Tab(modifier = Modifier.padding(12.dp),
                 selected = pagerState.currentPage == index,
                 onClick = {
                     scope.launch {
                         pagerState.animateScrollToPage(index)
                     }
-                }
-            ) {
+                }) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Image(
                         painter = painterResource(id = if (pagerState.currentPage == index) pair.second.second else pair.second.first),
@@ -355,8 +337,7 @@ fun RestaurantsContent() {
 @Composable
 fun DishesContent() {
     Column(
-        modifier = Modifier
-            .background(backRound),
+        modifier = Modifier.background(backRound),
     ) {
         LazyColumn {
             items(otherFruitsList.chunked(2)) { rowItems ->
@@ -372,7 +353,7 @@ fun DishesContent() {
 
 @Composable
 fun RenderProductItemWithRating(item: OtherFruit) {
-    val painter = rememberImagePainter(data = item.image) // Use the drawable ID here
+    val painter = rememberAsyncImagePainter(model = item.image) // Use the drawable ID here
     val isHeartFilled = remember { mutableStateOf(false) }
 
     Column(
@@ -383,14 +364,11 @@ fun RenderProductItemWithRating(item: OtherFruit) {
         horizontalAlignment = Alignment.CenterHorizontally
 
     ) {
-        Box(
-            modifier = Modifier
-                .clickable { /* Handle click event here */ }
-                .background(Color.LightGray, shape = RoundedCornerShape(20.dp))
-        ) {
+        Box(modifier = Modifier
+            .clickable { /* Handle click event here */ }
+            .background(Color.LightGray, shape = RoundedCornerShape(20.dp))) {
             Image(
-                modifier = Modifier
-                    .size(154.43.dp, 147.36.dp),
+                modifier = Modifier.size(154.43.dp, 147.36.dp),
                 contentScale = ContentScale.Crop,
                 painter = painter,
                 contentDescription = null
@@ -418,13 +396,11 @@ fun RenderProductItemWithRating(item: OtherFruit) {
                     .height(28.26.dp)
                     .padding(top = 10.dp, end = 10.dp)
                     .background(Color.White, shape = RoundedCornerShape(14.dp))
-                    .align(Alignment.TopEnd),
-                contentAlignment = Alignment.Center
+                    .align(Alignment.TopEnd), contentAlignment = Alignment.Center
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.heart_or), // Replace with your heart icon
-                    contentDescription = "Heart Icon",
-                    modifier = Modifier.size(10.dp)
+                    contentDescription = "Heart Icon", modifier = Modifier.size(10.dp)
                 )
             }
             Box(
@@ -434,8 +410,7 @@ fun RenderProductItemWithRating(item: OtherFruit) {
                     .padding(start = 10.dp)// dd this line
             ) {
                 Row(
-                    modifier = Modifier
-                        .background(Color.White, shape = RoundedCornerShape(16.dp)),
+                    modifier = Modifier.background(Color.White, shape = RoundedCornerShape(16.dp)),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -461,44 +436,35 @@ fun RenderProductItemWithRating(item: OtherFruit) {
                 }
             }
         }
-        Column(
-            modifier = Modifier
-                .align(Alignment.Start)
-                .clickable { /* Handle click event here */ }
-        )
-        {
+        Column(modifier = Modifier
+            .align(Alignment.Start)
+            .clickable { /* Handle click event here */ }) {
             Box(
-                modifier = Modifier
-                    .padding(start = 15.dp, top = 10.dp)
+                modifier = Modifier.padding(start = 15.dp, top = 10.dp)
             ) {
                 Text(
                     style = TextStyle(
-                        fontSize = 14.sp,
-                        letterSpacing = 1.sp,
-                        fontWeight = FontWeight.Bold
+                        fontSize = 14.sp, letterSpacing = 1.sp, fontWeight = FontWeight.Bold
                     ),
                     text = item.name,
                 )
             }
             Box() {
                 Row(
-                    modifier = Modifier
-                        .padding(start = 10.dp, top = 10.dp),
+                    modifier = Modifier.padding(start = 10.dp, top = 10.dp),
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.clock), // Replace with your heart icon
+                        painter = painterResource(id = R.drawable.clock),
                         contentDescription = "Heart Icon",
-                        modifier = Modifier.size(15.dp)
-                        .padding(top = 0.dp, end = 0.dp)
+                        modifier = Modifier
+                            .size(15.dp)
+                            .padding(top = 0.dp, end = 0.dp)
                     )
                     Text(
                         style = TextStyle(
-                            fontSize = 14.sp,
-                            letterSpacing = 1.sp,
-                            fontWeight = FontWeight.Bold
+                            fontSize = 14.sp, letterSpacing = 1.sp, fontWeight = FontWeight.Bold
                         ),
-                        modifier = Modifier
-                            .padding(top = 0.dp, end = 0.dp, start= 5.dp),
+                        modifier = Modifier.padding(top = 0.dp, end = 0.dp, start = 5.dp),
                         text = "10-15 mins",
                     )
                 }
@@ -508,19 +474,17 @@ fun RenderProductItemWithRating(item: OtherFruit) {
     }
 }
 
-
-
-    @ExperimentalPagerApi
-    @Composable
-    fun TabsContent(pagerState: com.google.accompanist.pager.PagerState) {
-        com.google.accompanist.pager.HorizontalPager(state = pagerState) { page ->
-            when (page) {
-                0 -> RestaurantsContent()
-                1 -> DishesContent()
-            }
+@OptIn(ExperimentalFoundationApi::class, ExperimentalPagerApi::class)
+@Composable
+fun TabsContent(pagerState: com.google.accompanist.pager.PagerState) {
+    com.google.accompanist.pager.HorizontalPager(state = pagerState) { page ->
+        when (page) {
+            0 -> RestaurantsContent()
+            1 -> DishesContent()
         }
     }
-@OptIn(ExperimentalPagerApi::class)
+}
+
 @Preview
 @Composable
 fun PreviewFavorite() {

@@ -94,11 +94,12 @@ fun HeaderRestaurant(
         }
     }
 }
-@Preview(
-    showBackground = true
-)
-@Composable
-fun HeaderHomePreview() {
-    HeaderHome(navController = NavController(
-        context = androidx.compose.ui.platform.LocalContext.current))
-}
+
+//@Preview(
+//    showBackground = true
+//)
+//@Composable
+//fun HeaderHomePreview() {
+//    HeaderHome(navController = NavController(
+//        context = androidx.compose.ui.platform.LocalContext.current))
+//}

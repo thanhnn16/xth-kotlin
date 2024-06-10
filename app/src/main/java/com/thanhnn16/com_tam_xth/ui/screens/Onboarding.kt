@@ -215,9 +215,9 @@ fun Onboarding(
         }
     }
 }
-
-@Preview
-@Composable
-fun WalkActivityPreview() {
-    Onboarding(navController = rememberNavController())
-}
+//
+//@Preview
+//@Composable
+//fun WalkActivityPreview() {
+//    Onboarding(navController = rememberNavController())
+//}
